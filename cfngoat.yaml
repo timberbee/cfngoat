@@ -99,6 +99,7 @@ Resources:
           Value: jonathan.jozwiak/nimrodkor
         - Key: git_last_modified_at
           Value: "2021-08-23 13:51:41"
+      Encrypted: True
 
   ### CFN Does not Support Volume Snapshot
   EBSAttachment:
@@ -370,6 +371,8 @@ Resources:
           Value: "2021-08-23 13:51:41"
         - Key: git_last_modified_by
           Value: nimrodkor@gmail.com
+      VersioningConfiguration:
+        Status: Enabled
 
   #############
   ###  IAM  ###
@@ -487,7 +490,6 @@ Resources:
       BackupRetentionPeriod: 0
       StorageEncrypted: False
       MonitoringInterval: 0
-      PubliclyAccessible: True
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-rds"
@@ -920,7 +922,6 @@ Resources:
     DeletionPolicy: Delete
     Properties:
       BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data"
-      AccessControl: PublicRead
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-data"
@@ -940,6 +941,8 @@ Resources:
           Value: timberbee
         - Key: git_org
           Value: bridgecrewio
+      VersioningConfiguration:
+        Status: Enabled
 
   ### TODO - Custom Upload of insecure document
   FinancialsBucket:
@@ -968,6 +971,8 @@ Resources:
           Value: bridgecrewio
         - Key: git_repo
           Value: cfngoat
+      VersioningConfiguration:
+        Status: Enabled
   OperationsBucket:
     # not encrypted, no access logs
     Type: AWS::S3::Bucket
